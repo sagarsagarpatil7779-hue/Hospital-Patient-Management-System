@@ -7,19 +7,14 @@ PATIENT_CSV = "patients.csv"
 BACKUP_JSON = "backup.json"
 AUDIT_LOG = "audit.log"
 
-# -----------------------------
 # DATA STRUCTURES
-# -----------------------------
-# patients: { patient_id: { "name": ..., "diagnosis": ..., "medications": [...] } }
+# patients: { patient_id: { "name": __, "diagnosis": ___, "medications":[ ] }
 patients = {}
 
 # appointments: list of tuples (date, time, doctor, patient_id)
 appointments = []
 
-
-# -----------------------------
 # HELPER: AUDIT LOGGING
-# -----------------------------
 def log_action(action_label, details=""):
     """
     Append an action line to audit.log.
@@ -52,9 +47,7 @@ def log_appointment_action(action_code, date, time, doctor, patient_id, human_te
         f.write(line)
 
 
-# -----------------------------
 # LOAD PATIENTS FROM CSV
-# -----------------------------
 def load_patients_from_csv(filename=PATIENT_CSV):
     """
     CSV format expected:
@@ -90,9 +83,7 @@ def load_patients_from_csv(filename=PATIENT_CSV):
         log_action("LOAD_PATIENTS_ERROR", f"Failed to load {filename}: {e}")
 
 
-# -----------------------------
 # APPOINTMENT VALIDATION
-# -----------------------------
 def has_appointment_conflict(date, time, doctor, patient_id):
     """
     Check if there is an overlapping appointment.
@@ -110,9 +101,7 @@ def has_appointment_conflict(date, time, doctor, patient_id):
     return False
 
 
-# -----------------------------
 # SCHEDULE / CANCEL APPOINTMENT
-# -----------------------------
 def schedule_appointment():
     date = input("Enter appointment date (YYYY-MM-DD): ").strip()
     time = input("Enter appointment time (HH:MM): ").strip()
@@ -188,12 +177,10 @@ def show_appointments():
         p = patients.get(patient_id, {})
         name = p.get("name", "Unknown")
         print(f"{date} {time} - {doctor} with {name} (ID: {patient_id})")
-    print("---------------------")
+    print("-----")
 
 
-# -----------------------------
 # TREATMENT REPORT
-# -----------------------------
 def generate_treatment_report():
     """
     Group patients by diagnosis and print report.
@@ -214,14 +201,12 @@ def generate_treatment_report():
         for pid, pdata in plist:
             meds = ", ".join(pdata.get("medications", [])) or "None"
             print(f"  ID: {pid}, Name: {pdata['name']}, Medications: {meds}")
-    print("===============================================")
+    print("===========")
 
     log_action("TREATMENT_REPORT", "Generated treatment report by diagnosis")
 
 
-# -----------------------------
 # BACKUP / RESTORE JSON
-# -----------------------------
 def backup_to_json(filename=BACKUP_JSON):
     """
     Backup patients and appointments to JSON.
@@ -273,9 +258,7 @@ def restore_from_json(filename=BACKUP_JSON):
         log_action("RESTORE_ERROR", f"Restore failed: {e}")
 
 
-# -----------------------------
 # HARD CHALLENGE: ROLLBACK
-# -----------------------------
 def rollback_last_actions(n=3):
     """
     Undo last n appointment actions (ADD_APPOINTMENT / CANCEL_APPOINTMENT)
@@ -350,9 +333,7 @@ def rollback_last_actions(n=3):
         log_action("ROLLBACK_DONE", f"Rolled back {actions_undone} actions")
 
 
-# -----------------------------
 # MENU / MAIN LOOP
-# -----------------------------
 def show_patients():
     if not patients:
         print("No patients loaded.")
@@ -364,7 +345,7 @@ def show_patients():
             f"ID: {pid}, Name: {pdata['name']}, "
             f"Diagnosis: {pdata['diagnosis']}, Medications: {meds}"
         )
-    print("----------------")
+    print("-----")
 
 
 def main_menu():
@@ -409,3 +390,4 @@ def main_menu():
 
 if __name__ == "__main__":
     main_menu()
+
