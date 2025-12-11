@@ -1,0 +1,16 @@
+2025-12-10T15:42:01 - Patients loaded from patients.csv | LOAD_PATIENTS
+2025-12-10T15:44:13 - Appointment scheduled for ID 110 | ADD_APPOINTMENT | 2025-10-11 | 4:30 | sagar | 110
+2025-12-10T15:45:25 - Generated treatment report by diagnosis | TREATMENT_REPORT
+2025-12-10T15:45:40 - Backup saved to backup.json | BACKUP_OK
+2025-12-10T15:45:52 - Data restored from backup.json | RESTORE_OK
+2025-12-10T15:46:01 - Rolled back 1 actions | ROLLBACK_DONE
+ADD|2025-10-12|10:29|ashok|110
+REPORT|treatment_report_created
+BACKUP|backup.json
+2025-12-10T16:52:34 - Patients loaded from patients.csv | LOAD_PATIENTS
+2025-12-10T16:53:45 - Appointment scheduled for ID 110 | ADD_APPOINTMENT | 2000-10-2 | 10:20 | ashok | 110
+2025-12-10T16:54:04 - Generated treatment report by diagnosis | TREATMENT_REPORT
+2025-12-10T16:54:20 - Data restored from backup.json | RESTORE_OK
+2025-12-10T17:11:22 - Patients loaded from patients.csv | LOAD_PATIENTS
+2025-12-10T17:11:47 - Patients loaded from patients.csv | LOAD_PATIENTS
+2025-12-10T17:27:01 - Backup saved to backup.json | BACKUP_OK
